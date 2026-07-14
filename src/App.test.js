@@ -1,8 +1,13 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render } from "@testing-library/react";
+import Steps from "./components/steps/Steps";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+jest.mock("./categories", () => ({
+  __esModule: true,
+  default: undefined,
+}));
+
+test("renders steps container even when category data is unavailable", () => {
+  const { container } = render(<Steps />);
+
+  expect(container.querySelector(".steps-container")).toBeInTheDocument();
 });

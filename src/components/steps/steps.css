@@ -1,0 +1,195 @@
+/* steps.css */
+.steps-container {
+    margin: 0.5rem 0rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(46, 234, 255, 0.05);
+    
+}
+
+.steps-wrapper {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Accordion overrides */
+.szh-accordion {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.szh-accordion__item {
+    border-bottom: 1px solid #e9ecef;
+}
+
+.szh-accordion__item:last-child {
+    border-bottom: none;
+}
+
+.szh-accordion__item-btn {
+    width: 100%;
+    padding: 0;
+    background: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.szh-accordion__item-btn:hover {
+    background-color: #f8f9fa;
+}
+
+.szh-accordion__item-content {
+    padding: 0 20px 20px 20px;
+    background: #fafbfc;
+}
+
+/* Step Header */
+.step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+.step-header:hover {
+    background-color: #f8f9fa;
+}
+
+.step-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+}
+
+.step-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.step-icon i {
+    color: white;
+}
+
+.step-header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+}
+
+.step-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #764ba2;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 0.4rem 0.6rem;
+}
+
+.step-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
+    padding: 0;
+}
+
+.step-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 16px;
+}
+
+.step-selection {
+    font-size: 14px;
+    color: #4a5568;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.step-arrow {
+    font-size: 14px;
+    color: #718096;
+    transition: transform 0.3s ease;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-arrow::before {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.szh-accordion__item--expanded .step-arrow::before {
+    transform: rotate(180deg);
+}
+
+/* Expanded content area */
+.step-content-expanded {
+    padding: 8px 0 4px 0;
+    color: #4a5568;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Divider line between steps */
+.step-divider {
+    height: 1px;
+    background: #e9ecef;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .steps-container {
+        margin: 20px 10px;
+        padding: 12px;
+    }
+
+    .step-header {
+        padding: 14px 16px;
+    }
+
+    .step-title {
+        font-size: 14px;
+    }
+
+    .step-header-right {
+        gap: 8px;
+    }
+
+    .step-selection {
+        font-size: 12px;
+    }
+
+    .step-icon {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        font-size: 14px;
+    }
+}
