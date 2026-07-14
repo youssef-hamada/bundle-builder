@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./steps.css";
 import stepsData from "../../categories";
 import { Accordion, AccordionItem } from "@szhsin/react-accordion";
+import Product from "../product/Product";
 
 const Steps = () => {
-  // State to track expanded items
-  const [expandedItems, setExpandedItems] = useState([]);
+  const [expandedItems, setExpandedItems] = useState([0]);
 
-  // Function to render HTML string safely
   const renderIcon = (htmlString) => {
     return <span dangerouslySetInnerHTML={{ __html: htmlString }} />;
   };
 
-  // Toggle accordion item
   const toggleItem = (index) => {
     setExpandedItems((prev) =>
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
@@ -22,14 +20,14 @@ const Steps = () => {
   return (
     <div className="steps-container">
       <div className="steps-wrapper">
-        <Accordion className="accordion">
+        <Accordion className="accordion" multiple={false}>
           {stepsData.categories.map((category, index) => (
             <AccordionItem
               key={index}
+              initialEntered={index === 0}
               header={() => (
                 <>
                   <span className="step-label">{category.step}</span>
-                  <hr />
                   <div
                     className="step-header"
                     onClick={() => toggleItem(index)}
@@ -55,9 +53,11 @@ const Steps = () => {
               )}
             >
               <div className="step-content-expanded">
-                {/* Add your expanded content here */}
-                <p>Content for {category.name}</p>
-                {/* You can add options, selections, etc. here */}
+                <Product />
+                <Product />
+                <Product />
+                <Product />
+                <Product />
               </div>
             </AccordionItem>
           ))}

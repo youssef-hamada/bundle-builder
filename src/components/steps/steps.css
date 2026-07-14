@@ -10,7 +10,8 @@
 .steps-wrapper {
     background: white;
     border-radius: 10px;
-    overflow: hidden;
+    
+    
 }
 
 /* Accordion overrides */
@@ -22,7 +23,7 @@
 }
 
 .szh-accordion__item {
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid #2d3748;
 }
 
 .szh-accordion__item:last-child {
@@ -69,9 +70,13 @@
     flex-direction: column;
     width: 100%;
 }
+.szh-accordion__item--expanded{
+    border-bottom: 0px;
+}
 
 .szh-accordion__item--expanded .step-header {
     background-color: rgb(197, 249, 255);
+    
 }
 
 .step-header-left {
@@ -103,6 +108,7 @@
     flex-direction: column;
     gap: 2px;
     text-align: left;
+    
 }
 
 .step-label {
@@ -113,6 +119,7 @@
     padding: 0.4rem 0.6rem;
     transition: background-color 0.3s ease;
     text-align: left;
+    border-bottom: #2d3748 solid 1px;
 }
 
 .szh-accordion__item--expanded .step-label {
@@ -142,23 +149,21 @@
 }
 
 .step-arrow {
-    font-size: 14px;
+    font-size: 16px;
     color: #718096;
     transition: transform 0.3s ease;
-    display: inline-block;
+    display: inline-flex;
     width: 20px;
     height: 20px;
-    display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .step-arrow::before {
-    content: '\f078';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    transition: transform 0.3s ease;
+    content: '▼';
     display: block;
+    line-height: 1;
+    transition: transform 0.3s ease;
 }
 
 .szh-accordion__item--expanded .step-arrow::before {
@@ -171,14 +176,18 @@
     color: #4a5568;
     font-size: 14px;
     line-height: 1.6;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    gap:1.5rem;
 }
 
-/* Divider line between steps */
-.step-divider {
-    height: 1px;
-    background: #e9ecef;
-    margin: 0;
-}
+
+
+
 
 /* Responsive */
 @media (max-width: 768px) {

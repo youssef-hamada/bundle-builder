@@ -18,9 +18,10 @@
 
 .section-steps{
   background-color: rgb(197, 249, 255);
-  padding:1rem;
+  /* padding:1rem; */
   border-radius: 0.4rem;
-  width: 50%;
+  width: 70%;
+  /* height: 80vh; */
 }
 
 @media (max-width: 768px) {
