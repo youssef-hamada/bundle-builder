@@ -24,12 +24,12 @@ const Steps = () => {
       <div className="steps-wrapper">
         <Accordion className="accordion">
           {stepsData.categories.map((category, index) => (
-            <>
-              <span className="step-label">{category.step}</span>
-              <hr />
-              <AccordionItem
-                key={index}
-                header={() => (
+            <AccordionItem
+              key={index}
+              header={() => (
+                <>
+                  <span className="step-label">{category.step}</span>
+                  <hr />
                   <div
                     className="step-header"
                     onClick={() => toggleItem(index)}
@@ -51,15 +51,15 @@ const Steps = () => {
                       <span className="step-arrow"></span>
                     </div>
                   </div>
-                )}
-              >
-                <div className="step-content-expanded">
-                  {/* Add your expanded content here */}
-                  <p>Content for {category.name}</p>
-                  {/* You can add options, selections, etc. here */}
-                </div>
-              </AccordionItem>
-            </>
+                </>
+              )}
+            >
+              <div className="step-content-expanded">
+                {/* Add your expanded content here */}
+                <p>Content for {category.name}</p>
+                {/* You can add options, selections, etc. here */}
+              </div>
+            </AccordionItem>
           ))}
         </Accordion>
       </div>

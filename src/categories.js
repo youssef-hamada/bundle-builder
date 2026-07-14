@@ -5,7 +5,7 @@ export const stepsData = {
       step: "STEP 1 OF 4",
       files: [
         {
-          "path-to-icon": "<i class='fa-regular fa-camera'></i>",
+          "path-to-icon": "<i class='fa-solid fa-camera'></i>",
         },
       ],
     },
@@ -23,7 +23,7 @@ export const stepsData = {
       step: "STEP 3 OF 4",
       files: [
         {
-          "path-to-icon": "<i class='fa-brands fa-tor-browser'></i>",
+          "path-to-icon": "<i class='fa-solid fa-microchip'></i>",
         },
       ],
     },
