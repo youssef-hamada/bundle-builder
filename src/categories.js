@@ -3,6 +3,7 @@ export const stepsData = {
     {
       name: "Choose your Camera",
       step: "STEP 1 OF 4",
+      categoryName: "cameras",
       files: [
         {
           "path-to-icon": "<i class='fa-solid fa-camera'></i>",
@@ -12,6 +13,7 @@ export const stepsData = {
     {
       name: "Choose your Plan",
       step: "STEP 2 OF 4",
+      categoryName: "plans",
       files: [
         {
           "path-to-icon": "<i class='fa-solid fa-shield'></i>",
@@ -21,6 +23,7 @@ export const stepsData = {
     {
       name: "Choose your Sensors",
       step: "STEP 3 OF 4",
+      categoryName: "sensors",
       files: [
         {
           "path-to-icon": "<i class='fa-solid fa-microchip'></i>",
@@ -30,6 +33,7 @@ export const stepsData = {
     {
       name: "Add Extra Protection",
       step: "STEP 4 OF 4",
+      categoryName: "accessories",
       files: [
         {
           "path-to-icon": "<i class='fa-solid fa-network-wired'></i>",

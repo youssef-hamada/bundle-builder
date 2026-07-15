@@ -6,8 +6,6 @@ const Product = ({ product }) => {
     return <div>Loading...</div>;
   }
 
-  console.log(product);
-
   return (
     <div className="product-container">
       {product.save && (

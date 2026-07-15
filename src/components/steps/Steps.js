@@ -7,9 +7,10 @@ import { getProducts } from "../../services/api";
 
 const Steps = () => {
   const [expandedItems, setExpandedItems] = useState([0]);
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState({});
-  const [error, setError] = useState({});
+  const [allProducts, setAllProducts] = useState([]);
+  const [categoryProducts, setCategoryProducts] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const renderIcon = (htmlString) => {
     return <span dangerouslySetInnerHTML={{ __html: htmlString }} />;
@@ -28,7 +29,16 @@ const Steps = () => {
     try {
       const response = await getProducts();
       if (response.success) {
-        setProducts(response.data);
+        setAllProducts(response.data);
+
+        const organized = {};
+        stepsData.categories.forEach((category, index) => {
+          organized[index] = response.data.filter(
+            (product) => product.category === category.categoryName,
+          );
+        });
+        console.log(organized);
+        setCategoryProducts(organized);
       } else {
         setError(response.message);
       }
@@ -41,7 +51,6 @@ const Steps = () => {
 
   useEffect(() => {
     fetchAllProducts();
-    console.log(products);
   }, []);
 
   return (
@@ -80,9 +89,15 @@ const Steps = () => {
               )}
             >
               <div className="step-content-expanded">
-                {products.map((product) => (
-                  <Product key={product._id} product={product} />
-                ))}
+                {loading ? (
+                  <p>Loading...</p>
+                ) : categoryProducts[index]?.length > 0 ? (
+                  categoryProducts[index].map((product) => (
+                    <Product key={product._id} product={product} />
+                  ))
+                ) : (
+                  <p>No products available</p>
+                )}
               </div>
             </AccordionItem>
           ))}
