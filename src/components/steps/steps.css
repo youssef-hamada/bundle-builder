@@ -190,6 +190,14 @@
 
 
 /* Responsive */
+
+@media (min-width:1200px){
+    
+    .step-content-expanded{
+        flex-wrap: no-wrap;
+    }
+
+}
 @media (max-width: 768px) {
     .steps-container {
         margin: 20px 10px;

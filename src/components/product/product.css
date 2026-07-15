@@ -11,7 +11,7 @@
 
 
 .product-img{
-    width: 12rem;
+    width: 14rem;
     height: 6rem;
     
 }
@@ -50,19 +50,22 @@
     align-items: center;
     width: 100%;
 }
-@media (max-width : 1265px){
+@media (min-width : 1400px){
     .product-container{
         flex-direction: column;
         align-items: center;
+        width: 15%;
     }
 
     .product-img{
-        width: 10rem;
-        height: 5rem;
+        max-width: 10rem;
+        height: 7rem;
     }
     
 }
-@media (max-width : 768px){
+
+
+@media (max-width : 968px){
     .product-container{
         flex-direction: column;
         align-items: center;
