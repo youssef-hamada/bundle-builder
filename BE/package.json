@@ -1,21 +1,19 @@
 {
-  "name": "be",
+  "name": "bundle-builder-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "API for bundle builder app",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "mongoose": "^9.7.4"
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "nodemon": "^2.0.22"
   }
 }

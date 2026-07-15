@@ -3,9 +3,13 @@ import "./steps.css";
 import stepsData from "../../categories";
 import { Accordion, AccordionItem } from "@szhsin/react-accordion";
 import Product from "../product/Product";
+import { getProducts } from "../../services/api";
 
 const Steps = () => {
   const [expandedItems, setExpandedItems] = useState([0]);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState({});
+  const [error, setError] = useState({});
 
   const renderIcon = (htmlString) => {
     return <span dangerouslySetInnerHTML={{ __html: htmlString }} />;
@@ -16,6 +20,29 @@ const Steps = () => {
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
     );
   };
+
+  const fetchAllProducts = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await getProducts();
+      if (response.success) {
+        setProducts(response.data);
+      } else {
+        setError(response.message);
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllProducts();
+    console.log(products);
+  }, []);
 
   return (
     <div className="steps-container">
@@ -53,11 +80,9 @@ const Steps = () => {
               )}
             >
               <div className="step-content-expanded">
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
+                {products.map((product) => (
+                  <Product key={product._id} product={product} />
+                ))}
               </div>
             </AccordionItem>
           ))}

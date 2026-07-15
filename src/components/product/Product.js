@@ -1,30 +1,69 @@
 import React from "react";
 import "./product.css";
 
-const Product = () => {
+const Product = ({ product }) => {
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
+  console.log(product);
+
   return (
     <div className="product-container">
-      <div className="save">
-        <p>save 20%</p>
-      </div>
+      {product.save && (
+        <div className="save">
+          <p>save 20%</p>
+        </div>
+      )}
       <div className="product-img">
-        <img src="cam-1.png" alt="" />
+        <img src={product.pic || "cam-5.jpg"} alt={product.name} />
       </div>
 
       <div className="product-body">
-        <div className="product-header">header</div>
-
-        <div className="product-desc">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Necessitatibus nulla laborum porro .
+        <div className="product-header">
+          <h3>{product.name}</h3>
         </div>
 
-        <div className="colors">colors</div>
+        <div className="product-desc">{product.desc}</div>
+
+        <div className="colors">
+          {product.colors &&
+            product.colors.map((colorItem, idx) => {
+              const isObject = colorItem && typeof colorItem === "object";
+              const colorName = isObject
+                ? Object.keys(colorItem)[0]
+                : colorItem;
+              const colorSrc = isObject
+                ? Object.values(colorItem)[0]
+                : product.pic;
+
+              return (
+                <div key={idx} className="color">
+                  <div className="color-img">
+                    <img src={colorSrc} alt={colorName} />
+                  </div>
+                  <p>{colorName}</p>
+                </div>
+              );
+            })}
+        </div>
 
         <div className="quan-price">
-          <div className="quantity">quantity</div>
+          <div className="quantity">
+            <div className="quan-dec disabled">
+              <p>-</p>
+            </div>
 
-          <div className="price">$23.12</div>
+            <div className="quan-num">
+              <p>1</p>
+            </div>
+
+            <div className="quan-inc active">
+              <p>+</p>
+            </div>
+          </div>
+
+          <div className="price">${product.price}</div>
         </div>
       </div>
     </div>
