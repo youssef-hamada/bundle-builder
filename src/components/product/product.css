@@ -5,7 +5,7 @@
     align-items: center;
     background-color: white;
     border-radius: 0.4rem;
-    width: 45%;
+    width: 48%;
     position: relative;
 }
 
@@ -136,6 +136,21 @@
     color: #111827;
 }
 
+.add-to-cart-button {
+    margin-top: 0.75rem;
+    padding: 0.65rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #2f14ff;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.add-to-cart-button:hover {
+    background-color: #220fcf;
+}
 
 @media (min-width : 1400px){
     .product-container{

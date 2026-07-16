@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./product.css";
+import { CartContext } from "../../context/CartContext";
 
 const Product = ({ product }) => {
+  const { cartItems, addItem, updateQuantity, removeItem } =
+    useContext(CartContext);
+  const cartEntry = cartItems.find((item) => item.product._id === product._id);
+  const currentQty = cartEntry?.quantity || 0;
+
   if (!product) {
     return <div>Loading...</div>;
   }
+
+  const handleIncrease = () => {
+    if (currentQty === 0) {
+      addItem(product, 1);
+    } else {
+      updateQuantity(product._id, currentQty + 1);
+    }
+  };
+
+  const handleDecrease = () => {
+    if (currentQty <= 1) {
+      if (cartEntry) {
+        removeItem(product._id);
+      }
+      return;
+    }
+
+    updateQuantity(product._id, currentQty - 1);
+  };
 
   return (
     <div className="product-container">
@@ -48,15 +73,18 @@ const Product = ({ product }) => {
 
         <div className="quan-price">
           <div className="quantity">
-            <div className="quan-dec disabled">
+            <div
+              className={`quan-dec ${currentQty <= 0 ? "disabled" : "active"}`}
+              onClick={handleDecrease}
+            >
               <p>-</p>
             </div>
 
             <div className="quan-num">
-              <p>1</p>
+              <p>{currentQty}</p>
             </div>
 
-            <div className="quan-inc active">
+            <div className="quan-inc active" onClick={handleIncrease}>
               <p>+</p>
             </div>
           </div>

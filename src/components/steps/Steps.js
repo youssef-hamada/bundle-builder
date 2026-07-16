@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./steps.css";
 import stepsData from "../../categories";
 import { Accordion, AccordionItem } from "@szhsin/react-accordion";
 import Product from "../product/Product";
 import { getProducts } from "../../services/api";
+import { CartContext } from "../../context/CartContext";
 
 const Steps = () => {
   const [expandedItems, setExpandedItems] = useState([0]);
@@ -11,6 +12,8 @@ const Steps = () => {
   const [categoryProducts, setCategoryProducts] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [initialCartLoaded, setInitialCartLoaded] = useState(false);
+  const { cartItems, addItem } = useContext(CartContext);
 
   const renderIcon = (htmlString) => {
     return <span dangerouslySetInnerHTML={{ __html: htmlString }} />;
@@ -53,6 +56,23 @@ const Steps = () => {
     fetchAllProducts();
   }, []);
 
+  useEffect(() => {
+    if (
+      !loading &&
+      !initialCartLoaded &&
+      cartItems.length === 0 &&
+      Object.keys(categoryProducts).length > 0
+    ) {
+      stepsData.categories.forEach((category, index) => {
+        const product = categoryProducts[index]?.[0];
+        if (product) {
+          addItem(product, 1);
+        }
+      });
+      setInitialCartLoaded(true);
+    }
+  }, [loading, initialCartLoaded, cartItems.length, categoryProducts, addItem]);
+
   return (
     <div className="steps-container">
       <div className="steps-wrapper">
@@ -90,7 +110,7 @@ const Steps = () => {
             >
               <div className="step-content-expanded">
                 {loading ? (
-                  <p>Loading...</p>
+                  <p>loading...</p>
                 ) : categoryProducts[index]?.length > 0 ? (
                   categoryProducts[index].map((product) => (
                     <Product key={product._id} product={product} />
