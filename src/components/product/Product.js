@@ -156,10 +156,6 @@ const Product = ({ product }) => {
 
           <div className="price">${product.price}</div>
         </div>
-
-        {selectedColor && (
-          <div className="selected-color-info">Selected: {selectedColor}</div>
-        )}
       </div>
     </div>
   );

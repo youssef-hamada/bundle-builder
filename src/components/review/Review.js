@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import "./review.css";
 import { CartContext } from "../../context/CartContext";
 
@@ -20,6 +20,8 @@ const Review = () => {
     saveCart,
   } = useContext(CartContext);
 
+  console.log(cartByCategory);
+
   const [saveMessage, setSaveMessage] = React.useState("");
 
   const totalSavings = useMemo(
@@ -33,7 +35,6 @@ const Review = () => {
     [cartItems],
   );
 
-  // Update the handlers to include color
   const handleIncrease = (productId, quantity, color = "white") => {
     updateQuantity(productId, quantity + 1, color);
   };

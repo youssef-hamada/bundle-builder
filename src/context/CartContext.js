@@ -11,7 +11,6 @@ const cartReducer = (state, action) => {
     case "ADD_ITEM": {
       const { product, quantity, color } = action.payload;
 
-      // Check if the same product with the same color already exists in cart
       const existingIndex = state.cartItems.findIndex(
         (item) => item.product._id === product._id && item.color === color,
       );

@@ -56,6 +56,7 @@ const Steps = () => {
     fetchAllProducts();
   }, []);
 
+  // predefined cart
   useEffect(() => {
     if (
       !loading &&
@@ -66,7 +67,16 @@ const Steps = () => {
       stepsData.categories.forEach((category, index) => {
         const product = categoryProducts[index]?.[0];
         if (product) {
-          addItem(product, 1);
+          // Get the first color as a string
+          let colorString = "white";
+          if (product.colors && product.colors.length > 0) {
+            const firstColor = product.colors[0];
+            colorString =
+              typeof firstColor === "string"
+                ? firstColor
+                : Object.keys(firstColor)[0];
+          }
+          addItem(product, 1, colorString); // Pass string color
         }
       });
       setInitialCartLoaded(true);
