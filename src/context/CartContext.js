@@ -9,15 +9,18 @@ const initialState = {
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM": {
+      const { product, quantity, color } = action.payload;
+
+      // Check if the same product with the same color already exists in cart
       const existingIndex = state.cartItems.findIndex(
-        (item) => item.product._id === action.payload.product._id,
+        (item) => item.product._id === product._id && item.color === color,
       );
+
       if (existingIndex !== -1) {
         const updatedItems = [...state.cartItems];
         updatedItems[existingIndex] = {
           ...updatedItems[existingIndex],
-          quantity:
-            updatedItems[existingIndex].quantity + action.payload.quantity,
+          quantity: updatedItems[existingIndex].quantity + quantity,
         };
         return { ...state, cartItems: updatedItems };
       }
@@ -27,8 +30,9 @@ const cartReducer = (state, action) => {
         cartItems: [
           ...state.cartItems,
           {
-            product: action.payload.product,
-            quantity: action.payload.quantity,
+            product: product,
+            quantity: quantity,
+            color: color || product.colors?.[0] || "white",
           },
         ],
       };
@@ -37,13 +41,18 @@ const cartReducer = (state, action) => {
       return {
         ...state,
         cartItems: state.cartItems.filter(
-          (item) => item.product._id !== action.payload.productId,
+          (item) =>
+            !(
+              item.product._id === action.payload.productId &&
+              item.color === action.payload.color
+            ),
         ),
       };
     case "UPDATE_QUANTITY": {
       const updatedItems = state.cartItems
         .map((item) =>
-          item.product._id === action.payload.productId
+          item.product._id === action.payload.productId &&
+          item.color === action.payload.color
             ? { ...item, quantity: action.payload.quantity }
             : item,
         )
@@ -74,16 +83,23 @@ export const CartProvider = ({ children }) => {
     return initial;
   });
 
-  const addItem = (product, quantity = 1) => {
-    dispatch({ type: "ADD_ITEM", payload: { product, quantity } });
+  const addItem = (product, quantity = 1, color = null) => {
+    const colorToUse = color || product.colors?.[0] || "white";
+    dispatch({
+      type: "ADD_ITEM",
+      payload: { product, quantity, color: colorToUse },
+    });
   };
 
-  const removeItem = (productId) => {
-    dispatch({ type: "REMOVE_ITEM", payload: { productId } });
+  const removeItem = (productId, color = null) => {
+    dispatch({ type: "REMOVE_ITEM", payload: { productId, color } });
   };
 
-  const updateQuantity = (productId, quantity) => {
-    dispatch({ type: "UPDATE_QUANTITY", payload: { productId, quantity } });
+  const updateQuantity = (productId, quantity, color = null) => {
+    dispatch({
+      type: "UPDATE_QUANTITY",
+      payload: { productId, quantity, color },
+    });
   };
 
   const clearCart = () => {

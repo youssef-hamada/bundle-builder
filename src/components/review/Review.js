@@ -33,16 +33,17 @@ const Review = () => {
     [cartItems],
   );
 
-  const handleIncrease = (productId, quantity) => {
-    updateQuantity(productId, quantity + 1);
+  // Update the handlers to include color
+  const handleIncrease = (productId, quantity, color = "white") => {
+    updateQuantity(productId, quantity + 1, color);
   };
 
-  const handleDecrease = (productId, quantity) => {
+  const handleDecrease = (productId, quantity, color = "white") => {
     const nextQuantity = quantity - 1;
     if (nextQuantity <= 0) {
-      removeItem(productId);
+      removeItem(productId, color);
     } else {
-      updateQuantity(productId, nextQuantity);
+      updateQuantity(productId, nextQuantity, color);
     }
   };
 
@@ -91,6 +92,12 @@ const Review = () => {
                         <div className="review-item-info">
                           <span className="review-item-name">
                             {product.name}
+                            {product.color && product.color !== "default" && (
+                              <span className="review-item-color">
+                                {" "}
+                                ({product.color})
+                              </span>
+                            )}
                           </span>
                           <span className="review-item-price">
                             $
@@ -105,7 +112,9 @@ const Review = () => {
                         <button
                           className="review-btn review-btn-decrease"
                           type="button"
-                          onClick={() => handleDecrease(product._id, quantity)}
+                          onClick={() =>
+                            handleDecrease(product._id, quantity, product.color)
+                          }
                         >
                           -
                         </button>
@@ -113,7 +122,9 @@ const Review = () => {
                         <button
                           className="review-btn review-btn-increase"
                           type="button"
-                          onClick={() => handleIncrease(product._id, quantity)}
+                          onClick={() =>
+                            handleIncrease(product._id, quantity, product.color)
+                          }
                         >
                           +
                         </button>

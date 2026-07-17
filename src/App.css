@@ -1,16 +1,15 @@
-*{
+* {
   box-sizing: border-box;
   padding: 0%;
-  margin: 0% ;
+  margin: 0%;
   font-family: 'Roboto', sans-serif;
 }
 
-
-
-.App{
+.App {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  /* Default: side by side */
+  align-items: stretch;
   justify-content: center;
   margin: 1rem;
   min-height: calc(100vh - 2rem);
@@ -24,25 +23,42 @@
   align-items: center;
 }
 
-.section-steps{
-  
+.section-steps {
   border-radius: 0.2rem;
+  flex: 0.65;
+  /* Takes 65% of space */
 }
 
+.section-review {
+  flex: 0.35;
+  /* Takes 35% of space */
+}
 
-
-@media(min-width:1410px){
+/* Large screens (1410px and above) - Switch to column */
+@media (min-width: 1410px) {
   .App {
-      flex-direction: column;
-      align-items: stretch;
-    }
+    flex-direction: column;
+    /* Stack vertically */
+    align-items: center;
+  }
 
-  .section-steps{
-    width: auto;
+  .section-steps {
+    flex: none;
+    width: 100%;
+    max-width: 1200px;
+    /* Optional: limit width for readability */
+  }
+
+  .section-review {
+    flex: none;
+    width: 100%;
+    max-width: 1200px;
+    /* Optional: limit width for readability */
   }
 }
 
-@media (min-width: 1024px) {
+/* Medium screens (1024px - 1409px) - Keep side by side */
+@media (min-width: 1024px) and (max-width: 1409px) {
   .App {
     flex-direction: row;
     align-items: stretch;
@@ -57,13 +73,33 @@
   }
 }
 
+/* Small screens (below 1024px) - Stack vertically */
 @media (max-width: 1023px) {
   .App {
     flex-direction: column;
+    align-items: center;
   }
 
-  .section-review {
+  .section-steps {
+    flex: none;
     width: 70%;
   }
 
+  .section-review {
+    flex: none;
+    width: 70%;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 768px) {
+  .App {
+    margin: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .section-steps,
+  .section-review {
+    width: 100%;
+  }
 }
