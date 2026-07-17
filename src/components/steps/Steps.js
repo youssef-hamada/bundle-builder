@@ -13,7 +13,7 @@ const Steps = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [initialCartLoaded, setInitialCartLoaded] = useState(false);
-  const { cartItems, addItem } = useContext(CartContext);
+  const { cartItems, addItem, cartByCategory } = useContext(CartContext);
 
   const renderIcon = (htmlString) => {
     return <span dangerouslySetInnerHTML={{ __html: htmlString }} />;
@@ -67,7 +67,7 @@ const Steps = () => {
       stepsData.categories.forEach((category, index) => {
         const product = categoryProducts[index]?.[0];
         if (product) {
-          // Get the first color as a string
+          // Get the first color as a string to solve color object issue in each first product
           let colorString = "white";
           if (product.colors && product.colors.length > 0) {
             const firstColor = product.colors[0];
@@ -76,12 +76,14 @@ const Steps = () => {
                 ? firstColor
                 : Object.keys(firstColor)[0];
           }
-          addItem(product, 1, colorString); // Pass string color
+          addItem(product, 1, colorString);
         }
       });
       setInitialCartLoaded(true);
     }
   }, [loading, initialCartLoaded, cartItems.length, categoryProducts, addItem]);
+
+  console.log(cartByCategory);
 
   return (
     <div className="steps-container">
@@ -109,9 +111,6 @@ const Steps = () => {
                       </div>
                     </div>
                     <div className="step-header-right">
-                      <span className="step-selection">
-                        will be done later today
-                      </span>
                       <span className="step-arrow"></span>
                     </div>
                   </div>
